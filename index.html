@@ -42,6 +42,27 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll("div");
+  const button = document.querySelector("button");
+
+  function logText(e) {
+    console.log(this.classList.value);
+    // e.stopPropagation(); // stop bubbling; will not trigger events on parents
+  }
+
+  divs.forEach(div => div.addEventListener("click", logText, {
+    capture: false,
+    once: true
+  }));
+  // listening for clicks on nested elements will trigger all of them
+  // i.e clicking on div 3 will also click on divs 2 and 1
+  // capture will make the function run on the way down rather than up
+
+button.addEventListener("click", () => {
+  console.log("clicked!");
+}, {
+  once: true
+});
 
 </script>
 </body>
